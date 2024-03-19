@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
+import {StatusBar} from 'react-native';
 
-import {SafeAreaView, StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 
 import SplashScreen from 'react-native-splash-screen';
 
@@ -10,9 +11,9 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <SafeAreaView>
+    <NavigationContainer>
       <StatusBar />
-    </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
