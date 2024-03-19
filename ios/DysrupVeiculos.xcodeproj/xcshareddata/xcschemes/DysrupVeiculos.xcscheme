@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "DysrupVeiculos.app"
-               BlueprintName = "DysrupVeiculos"
-               ReferencedContainer = "container:DysrupVeiculos.xcodeproj">
+               BuildableName = "dysrupveiculos.app"
+               BlueprintName = "dysrupveiculos"
+               ReferencedContainer = "container:dysrupveiculos.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "DysrupVeiculosTests.xctest"
-               BlueprintName = "DysrupVeiculosTests"
-               ReferencedContainer = "container:DysrupVeiculos.xcodeproj">
+               BuildableName = "dysrupveiculosTests.xctest"
+               BlueprintName = "dysrupveiculosTests"
+               ReferencedContainer = "container:dysrupveiculos.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "DysrupVeiculos.app"
-            BlueprintName = "DysrupVeiculos"
-            ReferencedContainer = "container:DysrupVeiculos.xcodeproj">
+            BuildableName = "dysrupveiculos.app"
+            BlueprintName = "dysrupveiculos"
+            ReferencedContainer = "container:dysrupveiculos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "DysrupVeiculos.app"
-            BlueprintName = "DysrupVeiculos"
-            ReferencedContainer = "container:DysrupVeiculos.xcodeproj">
+            BuildableName = "dysrupveiculos.app"
+            BlueprintName = "dysrupveiculos"
+            ReferencedContainer = "container:dysrupveiculos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

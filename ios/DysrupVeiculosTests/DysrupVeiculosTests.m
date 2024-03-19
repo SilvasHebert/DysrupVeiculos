@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface DysrupVeiculosTests : XCTestCase
+@interface dysrupveiculosTests : XCTestCase
 
 @end
 
-@implementation DysrupVeiculosTests
+@implementation dysrupveiculosTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {
