@@ -9,13 +9,14 @@ import {
 import colors from '../consts/colors';
 
 type Button = {
+  onPress: () => void;
   props?: TouchableOpacityProps;
   children: string;
 };
 
-export function Button({props, children}: Button) {
+export function Button({onPress, props, children}: Button) {
   return (
-    <TouchableOpacity style={styles.button} {...props}>
+    <TouchableOpacity style={styles.button} {...props} onPress={onPress}>
       <Text style={styles.text}>{children}</Text>
     </TouchableOpacity>
   );
