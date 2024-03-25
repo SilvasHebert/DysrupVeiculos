@@ -10,4 +10,5 @@ export default {
 
   white: '#FFFFFF',
   gray: '#E1E1E6',
+  grayAlt: '#8D8D99',
 };

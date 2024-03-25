@@ -8,13 +8,12 @@ import {
 
 import colors from '../consts/colors';
 
-type Button = {
+type Button = TouchableOpacityProps & {
   onPress: () => void;
-  props?: TouchableOpacityProps;
   children: string;
 };
 
-export function Button({onPress, props, children}: Button) {
+export function Button({onPress, children, ...props}: Button) {
   return (
     <TouchableOpacity style={styles.button} {...props} onPress={onPress}>
       <Text style={styles.text}>{children}</Text>

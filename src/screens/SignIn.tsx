@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useAuth} from '@realm/react';
@@ -15,21 +15,13 @@ export function SignIn() {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
 
-      console.log('userInfo');
-      console.log(userInfo);
-
       if (userInfo.idToken) {
         logInWithGoogle({idToken: userInfo.idToken});
       }
     } catch (error) {
-      console.log(error);
+      console.log('GoogleSignin', error);
     }
   };
-
-  useEffect(() => {
-    console.log('result');
-    console.log(result);
-  }, [result]);
 
   return (
     <ImageBackground
@@ -47,6 +39,7 @@ export function SignIn() {
               <Text style={styles.phrase}>Gestão de uso de veículos</Text>
             </View>
             <Button
+              disabled={result.pending}
               onPress={() => {
                 signInGoogle();
               }}>

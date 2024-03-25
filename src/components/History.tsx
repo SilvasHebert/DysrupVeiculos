@@ -1,49 +1,19 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 
-import colors from '../consts/colors';
 import {HistoryItem} from './HistoryItem';
 import {Title} from './Title';
 
-export function History() {
-  const data = [
-    {
-      status: true,
-      plate: 'XXX-000',
-      datetime: new Date(),
-    },
-    {
-      status: true,
-      plate: 'XXX-000',
-      datetime: new Date(),
-    },
-    {
-      status: true,
-      plate: 'XXX-000',
-      datetime: new Date(),
-    },
-    {
-      status: true,
-      plate: 'XXX-000',
-      datetime: new Date(),
-    },
-    {
-      status: true,
-      plate: 'XXX-000',
-      datetime: new Date(),
-    },
-    {
-      status: true,
-      plate: 'XXX-000',
-      datetime: new Date(),
-    },
-  ];
+export function History({trips}) {
+  if (!trips || !trips.length) {
+    return;
+  }
 
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.content}
-      data={data}
+      data={trips}
       ListHeaderComponent={() => <Title>Histórico</Title>}
       stickyHeaderIndices={[0]}
       renderItem={({item}) => <HistoryItem data={item} />}

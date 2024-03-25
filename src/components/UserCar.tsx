@@ -4,18 +4,29 @@ import {useNavigation} from '@react-navigation/native';
 
 import colors from '../consts/colors';
 
-export function UserCar() {
+export function UserCar({trip}) {
   const {navigate} = useNavigation();
 
-  const message = 'Nenhum veículo em uso.';
-  const clickMessage = 'Clique aqui para registrar a saída.';
+  console.log(trip);
+
+  const message = trip
+    ? `Veículo ${trip.carPlate} em uso`
+    : 'Nenhum veículo em uso.';
+
+  const clickMessage = `Clique aqui para registrar a ${
+    trip ? 'chegada' : 'saída'
+  }.`;
 
   return (
     <TouchableOpacity
       style={styles.wrapper}
-      onPress={() => navigate('CheckIn')}>
+      onPress={() => navigate(trip ? 'CheckOut' : 'CheckIn')}>
       <View style={styles.iconContainer}>
-        <Image source={require('../assets/images/key.png')} />
+        {trip ? (
+          <Image source={require('../assets/images/big-car.png')} />
+        ) : (
+          <Image source={require('../assets/images/key.png')} />
+        )}
       </View>
       <View style={styles.messageWrapper}>
         <Text style={styles.message}>

@@ -1,27 +1,52 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useAuth, useUser} from '@realm/react';
 
 import colors from '../consts/colors';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 export function UserHeader() {
+  const user = useUser();
+  const {logOut} = useAuth();
+
+  const [loading, setLoading] = useState(true);
+
+  GoogleSignin.getCurrentUser()
+    .then(response => {
+      user.profile.photo = response?.user.photo;
+    })
+    .finally(() => setLoading(false));
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.userInfo}>
-        <Image
-          source={{
-            uri: 'https://lh3.googleusercontent.com/a/ACg8ocLVci0y5tbT5pcWF-MhZm1vn6ihz6kV7NHf6KwYuem9B60=s96-c',
-          }}
-          style={styles.userPhoto}
-        />
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          <Image
+            source={{
+              uri: user.profile.photo,
+            }}
+            style={styles.userPhoto}
+          />
+        )}
+
         <View>
           <Text style={styles.hello}>Olá,</Text>
-          <Text style={styles.name}>Hebert</Text>
+          <Text style={styles.name}>{user.profile.name}</Text>
         </View>
       </View>
-      <View>
+      <TouchableOpacity onPress={() => logOut()}>
         <Icon name="power" color={colors.icon} size={32} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
