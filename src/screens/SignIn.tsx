@@ -1,8 +1,8 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useAuth} from '@realm/react';
-import LinearGradient from 'react-native-linear-gradient';
 
 import {Button} from '../components/Button';
 import colors from '../consts/colors';

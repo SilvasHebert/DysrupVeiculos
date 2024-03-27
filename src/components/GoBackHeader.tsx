@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
 import colors from '../consts/colors';
 
 type GoBackHeaderProps = {
@@ -34,7 +35,8 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 32,
+    paddingHorizontal: 32,
+    paddingVertical: 28,
   },
   title: {
     color: colors.white,

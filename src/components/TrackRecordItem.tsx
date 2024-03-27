@@ -3,7 +3,7 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 
 import colors from '../consts/colors';
 
-export function HistoryItem({data}) {
+export function TrackRecordItem({data}) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.messageWrapper}>

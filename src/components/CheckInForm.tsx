@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
+import {Region} from 'react-native-maps';
+import {useNavigation} from '@react-navigation/native';
 import {useRealm, useUser} from '@realm/react';
+import {BSON} from 'realm';
 
+import {getAddressWithCoords} from '../utils/Location';
+
+import {Button} from './Button';
 import {Location} from './Location';
 import {WrappedTextInput} from './WrappedTextInput';
-import {Button} from './Button';
-import {getAddressWithCoords} from '../utils/Location';
-import {Region} from 'react-native-maps';
-import {BSON} from 'realm';
-import {useNavigation} from '@react-navigation/native';
 
 type CheckInFormProps = {
   currentCoords: Region;

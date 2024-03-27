@@ -8,8 +8,10 @@ export class Trip extends Realm.Object {
   checkInLat!: number;
   CheckInLng!: number;
   CheckInAt!: Date;
+  checkInAddress!: string;
   CheckOutLat?: number;
   CheckOutLng?: number;
+  checkOutAddress?: string;
   checkOutAt?: Date;
   active!: Boolean;
 
@@ -23,9 +25,11 @@ export class Trip extends Realm.Object {
       finality: 'string',
       checkInLat: 'float',
       CheckInLng: 'float',
+      checkInAddress: 'string',
       CheckInAt: 'date',
       CheckOutLat: 'float?',
       CheckOutLng: 'float?',
+      checkOutAddress: 'string?',
       checkOutAt: 'date?',
       active: 'bool',
     },

@@ -23,7 +23,7 @@ export function Button({onPress, children, ...props}: Button) {
 
 const styles = StyleSheet.create({
   button: {
-    width: '100%',
+    flex: 1,
     height: 56,
     backgroundColor: colors.primary,
     borderRadius: 6,

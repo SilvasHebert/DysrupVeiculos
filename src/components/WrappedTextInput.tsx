@@ -5,8 +5,8 @@ import {
   Text,
   TextInput,
   TextInputProps,
-  View,
 } from 'react-native';
+
 import colors from '../consts/colors';
 
 type WrappedTextInputProps = TextInputProps & {

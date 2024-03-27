@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
-
-import {GoBackHeader} from '../components/GoBackHeader';
-import {Map} from '../components/Map';
-import {CheckInForm} from '../components/CheckInForm';
+import {ScrollView, StyleSheet} from 'react-native';
 import {Region} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+
+import {CheckInForm} from '../components/CheckInForm';
+import {GoBackHeader} from '../components/GoBackHeader';
+import {Map} from '../components/Map';
 
 export function CheckIn() {
   const [initialPos, setInitialPos] = useState<Region>();

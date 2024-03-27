@@ -7,10 +7,8 @@ import colors from '../consts/colors';
 export function UserCar({trip}) {
   const {navigate} = useNavigation();
 
-  console.log(trip);
-
   const message = trip
-    ? `Veículo ${trip.carPlate} em uso`
+    ? `Veículo ${trip.carPlate} em uso, `
     : 'Nenhum veículo em uso.';
 
   const clickMessage = `Clique aqui para registrar a ${
@@ -20,7 +18,7 @@ export function UserCar({trip}) {
   return (
     <TouchableOpacity
       style={styles.wrapper}
-      onPress={() => navigate(trip ? 'CheckOut' : 'CheckIn')}>
+      onPress={() => (trip ? navigate('CheckOut', trip) : navigate('CheckIn'))}>
       <View style={styles.iconContainer}>
         {trip ? (
           <Image source={require('../assets/images/big-car.png')} />

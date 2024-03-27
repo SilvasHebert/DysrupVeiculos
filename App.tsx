@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
-import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {NavigationContainer} from '@react-navigation/native';
 import {AppProvider, RealmProvider, UserProvider} from '@realm/react';
+import {OpenRealmBehaviorType} from 'realm';
 
+import 'react-native-gesture-handler';
+
+import {androidClientId, GoogleClientId, RealmAppId} from './src/consts/tokens';
+import {Trip} from './src/models/Trip';
 import {AppRoutes} from './src/routes/app.routes';
 import {AuthRoutes} from './src/routes/auth.routes';
-import {GoogleClientId, RealmAppId, androidClientId} from './src/consts/tokens';
 import {requestLocationPermissionANDROID} from './src/utils/Location';
-import {OpenRealmBehaviorType} from 'realm';
-import {Trip} from './src/models/Trip';
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -18,7 +19,6 @@ function App(): JSX.Element {
 
     GoogleSignin.configure({
       webClientId: GoogleClientId,
-      androidClientId: androidClientId,
       offlineAccess: true,
     });
 

@@ -8,10 +8,10 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useAuth, useUser} from '@realm/react';
 
 import colors from '../consts/colors';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 export function UserHeader() {
   const user = useUser();

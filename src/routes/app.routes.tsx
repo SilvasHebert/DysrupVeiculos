@@ -1,25 +1,56 @@
 import React, {useEffect} from 'react';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
+import {useRealm} from '@realm/react';
 
 import colors from '../consts/colors';
-import {Home} from '../screens/Home';
 import {Trip} from '../models/Trip';
 import {CheckIn} from '../screens/CheckIn';
 import {CheckOut} from '../screens/CheckOut';
+import {Home} from '../screens/Home';
 
-import {useQuery} from '@realm/react';
+type CheckOutProps = {
+  _id: Realm.BSON.ObjectId;
+  userId: Realm.BSON.ObjectId;
+  carPlate: string;
+  finality: string;
+  checkInLat: number;
+  CheckInLng: number;
+  CheckInAt: Date;
+  checkInAddress: string;
+  CheckOutLat?: number;
+  CheckOutLng?: number;
+  checkOutAddress?: string;
+  checkOutAt?: Date;
+  active: Boolean;
+};
 
-const Stack = createStackNavigator();
+type AppParamList = {
+  Home: undefined;
+  CheckIn: undefined;
+  CheckOut: CheckOutProps;
+};
+
+export type CheckOutScreenProps = NativeStackScreenProps<
+  AppParamList,
+  'CheckOut'
+>;
+
+const Stack = createStackNavigator<AppParamList>();
 
 export function AppRoutes() {
-  const trip = useQuery(Trip);
+  const realm = useRealm();
 
   useEffect(() => {
-    trip.subscribe();
-  }, [trip]);
+    realm.subscriptions.update(mutableSubs => {
+      mutableSubs.add(realm.objects(Trip));
+    });
+
+    console.log('app.routes.txt update');
+  }, [realm]);
 
   return (
     <Stack.Navigator
