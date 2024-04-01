@@ -16,8 +16,8 @@ export function CheckIn() {
         setInitialPos({
           latitude: coords.latitude,
           longitude: coords.longitude,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         });
       },
       (error: any) => {

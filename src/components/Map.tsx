@@ -1,10 +1,24 @@
-import React, {useState} from 'react';
+import React, {ReactElement, useContext, useState} from 'react';
 import {Dimensions, StyleSheet, View} from 'react-native';
-import MapView, {LatLng, Region} from 'react-native-maps';
+import MapView, {
+  LatLng,
+  MapViewProps,
+  Polyline,
+  Region,
+} from 'react-native-maps';
 
-type MapProps = {initialPos: Region | undefined};
+import colors from '../consts/colors';
+import {WatchPositionContext} from '../contexts/WatchPositionContext';
 
-export function Map({initialPos}: MapProps) {
+type MapProps = {
+  initialPos: Region | undefined;
+  children?: ReactElement;
+  props?: MapViewProps;
+};
+
+export function Map({initialPos, children, ...props}: MapProps) {
+  const {routes} = useContext(WatchPositionContext);
+
   const [path, setPath] = useState<LatLng[]>([]);
 
   const addCoordinateToPath = (newCoordinate: LatLng | undefined) => {
@@ -13,6 +27,10 @@ export function Map({initialPos}: MapProps) {
     }
   };
 
+  if (!initialPos) {
+    return <></>;
+  }
+
   return (
     <View style={styles.wrapper}>
       <MapView
@@ -20,10 +38,20 @@ export function Map({initialPos}: MapProps) {
         region={initialPos}
         showsUserLocation={true}
         showsMyLocationButton={true}
+        scrollEnabled={false}
+        zoomEnabled={false}
+        rotateEnabled={false}
+        pitchEnabled={false}
         onUserLocationChange={event =>
           addCoordinateToPath(event.nativeEvent.coordinate)
-        }>
-        {/* <Polyline coordinates={path} strokeColor="#000" strokeWidth={3} /> */}
+        }
+        {...props}>
+        {children}
+        <Polyline
+          coordinates={routes}
+          strokeColors={[colors.primary]}
+          strokeWidth={6}
+        />
       </MapView>
     </View>
   );

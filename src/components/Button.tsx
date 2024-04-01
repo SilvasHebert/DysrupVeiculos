@@ -23,8 +23,8 @@ export function Button({onPress, children, ...props}: Button) {
 
 const styles = StyleSheet.create({
   button: {
-    flex: 1,
     height: 56,
+    flexGrow: 1,
     backgroundColor: colors.primary,
     borderRadius: 6,
     justifyContent: 'center',

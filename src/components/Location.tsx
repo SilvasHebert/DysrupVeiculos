@@ -1,6 +1,7 @@
 import React from 'react';
-import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 
+import Car from '../assets/icons/car.svg';
 import colors from '../consts/colors';
 
 type LocationProps = {
@@ -11,7 +12,7 @@ export function Location({children}: LocationProps) {
   return (
     <View style={styles.location}>
       <View style={styles.iconContainer}>
-        <Image source={require('../assets/images/car.png')} />
+        <Car width={24} height={24} />
       </View>
       <View style={styles.text}>
         <Text style={styles.title}>Localização atual</Text>

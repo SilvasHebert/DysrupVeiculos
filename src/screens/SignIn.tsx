@@ -1,7 +1,17 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import {useAuth} from '@realm/react';
 
 import {Button} from '../components/Button';
@@ -19,7 +29,35 @@ export function SignIn() {
         logInWithGoogle({idToken: userInfo.idToken});
       }
     } catch (error) {
-      console.log('GoogleSignin', error);
+      signInErrorHandler(error);
+    }
+  };
+
+  const signInErrorHandler = (error: any) => {
+    if (!error || !error?.code) {
+      return;
+    }
+
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+    } else if (error.code === statusCodes.IN_PROGRESS) {
+    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      Alert.alert('Alerta', 'Google Play Services não disponível', [
+        {
+          text: 'Ok',
+          style: 'cancel',
+        },
+      ]);
+    } else {
+      Alert.alert(
+        'Alerta',
+        'Não foi possivel realizar o Login com o Google, favor tente novamente',
+        [
+          {
+            text: 'Ok',
+            style: 'cancel',
+          },
+        ],
+      );
     }
   };
 
@@ -27,11 +65,12 @@ export function SignIn() {
     <ImageBackground
       source={require('../assets/images/background-croped.png')}
       style={styles.imageBackground}>
+      <StatusBar backgroundColor={colors.black} />
       <LinearGradient
         colors={['rgba(32, 32, 36, 0)', 'rgba(32, 32, 36, 0.8)']}
         style={styles.linearGradient}>
         <LinearGradient
-          colors={['#000000FF', '#00000000']}
+          colors={[colors.black + 'FF', colors.black + '00']}
           style={styles.linearGradient}>
           <View style={styles.wrapper}>
             <View>

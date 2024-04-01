@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Image,
   StatusBar,
   StyleSheet,
   Text,
@@ -9,6 +8,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
+import ArrowLeft from '../assets/icons/arrow-left.svg';
 import colors from '../consts/colors';
 
 type GoBackHeaderProps = {
@@ -23,7 +23,7 @@ export function GoBackHeader({children}: GoBackHeaderProps) {
       <StatusBar backgroundColor={colors.background} />
       <View style={styles.wrapper}>
         <TouchableOpacity onPress={() => goBack()}>
-          <Image source={require('../assets/images/arrow-left.png')} />
+          <ArrowLeft />
         </TouchableOpacity>
         <Text style={styles.title}>{children}</Text>
       </View>

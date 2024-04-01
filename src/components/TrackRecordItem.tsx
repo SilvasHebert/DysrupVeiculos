@@ -1,23 +1,37 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
+import Check from '../assets/icons/check.svg';
+import Clock from '../assets/icons/clock.svg';
 import colors from '../consts/colors';
+import {TripType} from '../models/Trip';
 
-export function TrackRecordItem({data}) {
+type TrackRecordItemProps = {
+  item: TripType;
+};
+
+export function TrackRecordItem({item}: TrackRecordItemProps) {
+  if (!item) {
+    return <></>;
+  }
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.messageWrapper}>
-        <Text style={styles.plate}>{data.plate}</Text>
-        <Text style={styles.date}>
-          Saída em {data.datetime.getUTCDate()}/
-          {data.datetime.getUTCMonth() + 1} às
-        </Text>
+        <Text style={styles.plate}>{item.carPlate}</Text>
+        {item.CheckInAt ? (
+          <Text style={styles.date}>
+            Saída em {item.CheckInAt.toLocaleDateString('pt-BR')} às{' '}
+            {item.CheckInAt.toLocaleTimeString('pt-BR', {
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+          </Text>
+        ) : (
+          <></>
+        )}
       </View>
-      {false ? (
-        <Image source={require('../assets/images/clock.png')} />
-      ) : (
-        <Image source={require('../assets/images/check.png')} />
-      )}
+      {false ? <Clock /> : <Check />}
     </View>
   );
 }
@@ -26,13 +40,13 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: colors.secondary,
     padding: 22,
-    gap: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 6,
+    borderRadius: 4,
   },
   messageWrapper: {
     flex: 1,
+    gap: 6,
   },
   plate: {
     fontSize: 16,

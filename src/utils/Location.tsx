@@ -1,5 +1,6 @@
 import {PermissionsAndroid} from 'react-native';
 import {LatLng} from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
 
 import {GoogleMapsAPIKey} from '../consts/tokens';
 
@@ -23,11 +24,8 @@ export const getAddressWithCoords = async (coords: LatLng) => {
   const {latitude, longitude} = coords;
 
   const address = await fetch(
-    `https://maps.google.com/maps/api/geocode/json?key=${GoogleMapsAPIKey}&latlng=${latitude}%2C${longitude}`,
+    `https://maps.google.com/maps/api/geocode/json?key=${GoogleMapsAPIKey}&latlng=${latitude}%2C${longitude}&region=BR&language=pt-BR`,
   ).then(response => response.json());
-
-  console.log('address.results');
-  console.log(address.results);
 
   return address.results[0].formatted_address;
 };

@@ -9,7 +9,10 @@ export default {
   icon: '#7C7C8A',
 
   white: '#FFFFFF',
+  black: '#000000',
   gray: '#E1E1E6',
   grayAlt: '#8D8D99',
   carPlate: '#C4C4CC',
+
+  toast: '#505059',
 };

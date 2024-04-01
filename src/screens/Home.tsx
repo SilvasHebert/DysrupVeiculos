@@ -6,25 +6,24 @@ import {Title} from '../components/Title';
 import {TrackRecordItem} from '../components/TrackRecordItem';
 import {UserCar} from '../components/UserCar';
 import {UserHeader} from '../components/UserHeader';
+import {Trip} from '../models/Trip';
 
 export function Home() {
   const realm = useRealm();
-  const trips = realm.objects('Trip');
-  const currentTrip = trips.filtered('active == true')[0];
-  const oldTrips = trips.filtered('active == false');
+  const trips = realm.objects(Trip);
 
   return (
     <>
       <UserHeader />
       <View style={styles.content}>
-        <UserCar trip={currentTrip} />
+        <UserCar />
         <FlatList
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.flatListContent}
-          data={oldTrips}
+          data={trips.filtered('active == false').sorted('CheckInAt', true)}
           ListHeaderComponent={() => <Title>Histórico</Title>}
           stickyHeaderIndices={[0]}
-          renderItem={({item}) => <TrackRecordItem data={item} />}
+          renderItem={({item}) => <TrackRecordItem item={item} />}
         />
       </View>
     </>

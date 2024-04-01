@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 import {Region} from 'react-native-maps';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/core';
 import {useRealm, useUser} from '@realm/react';
 import {BSON} from 'realm';
 
+import {WatchPositionContext} from '../contexts/WatchPositionContext';
 import {getAddressWithCoords} from '../utils/Location';
 
 import {Button} from './Button';
@@ -19,6 +20,8 @@ export function CheckInForm({currentCoords}: CheckInFormProps) {
   const {goBack} = useNavigation();
   const realm = useRealm();
   const user = useUser();
+
+  const {watchPosition} = useContext(WatchPositionContext);
 
   const [carPlateInput, setCarPlateInput] = useState('');
   const [finalityInput, setFinalityInput] = useState('');
@@ -69,25 +72,16 @@ export function CheckInForm({currentCoords}: CheckInFormProps) {
 
     const {latitude, longitude} = currentCoords;
 
-    createTrip({
-      carPlate: carPlateInput,
-      finality: finalityInput,
-      latitude,
-      longitude,
-      userId: user.id,
-    });
-  };
-
-  const createTrip = ({carPlate, finality, latitude, longitude, userId}) => {
     try {
       realm.write(() => {
         realm.create('Trip', {
           _id: new BSON.ObjectId(),
-          userId: new BSON.ObjectId(userId),
-          carPlate: carPlate,
-          finality: finality,
+          userId: new BSON.ObjectId(user.id),
+          carPlate: carPlateInput,
+          finality: finalityInput,
           checkInLat: latitude,
           CheckInLng: longitude,
+          checkInAddress: currentAddress,
           CheckInAt: new Date(),
           active: true,
         });
@@ -105,6 +99,7 @@ export function CheckInForm({currentCoords}: CheckInFormProps) {
         ],
       );
     } finally {
+      watchPosition();
       goBack();
     }
   };

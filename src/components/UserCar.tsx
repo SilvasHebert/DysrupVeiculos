@@ -1,34 +1,56 @@
-import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useRealm} from '@realm/react';
 
+import Car from '../assets/icons/car.svg';
+import Key from '../assets/icons/key.svg';
 import colors from '../consts/colors';
+import {Trip} from '../models/Trip';
 
-export function UserCar({trip}) {
+export function UserCar() {
   const {navigate} = useNavigation();
+  const realm = useRealm();
+  const tripObjects = realm.objects(Trip);
 
-  const message = trip
-    ? `Veículo ${trip.carPlate} em uso, `
-    : 'Nenhum veículo em uso.';
+  const [trip, setTrip] = useState<Trip | null>(null);
 
-  const clickMessage = `Clique aqui para registrar a ${
-    trip ? 'chegada' : 'saída'
-  }.`;
+  const changeFunction = () => {
+    const filtredTrip = tripObjects.filtered('active == true')[0];
+    setTrip(filtredTrip);
+  };
 
-  return (
+  tripObjects.addListener(changeFunction);
+
+  return trip ? (
     <TouchableOpacity
       style={styles.wrapper}
-      onPress={() => (trip ? navigate('CheckOut', trip) : navigate('CheckIn'))}>
+      onPress={() => navigate('CheckOut')}>
       <View style={styles.iconContainer}>
-        {trip ? (
-          <Image source={require('../assets/images/big-car.png')} />
-        ) : (
-          <Image source={require('../assets/images/key.png')} />
-        )}
+        <Car />
       </View>
       <View style={styles.messageWrapper}>
         <Text style={styles.message}>
-          {message} <Text style={styles.clickMessage}>{clickMessage}</Text>
+          Veículo {trip.carPlate} em uso,{' '}
+          <Text style={styles.clickMessage}>
+            Clique aqui para registrar chegada
+          </Text>
+        </Text>
+      </View>
+    </TouchableOpacity>
+  ) : (
+    <TouchableOpacity
+      style={styles.wrapper}
+      onPress={() => navigate('CheckIn')}>
+      <View style={styles.iconContainer}>
+        <Key />
+      </View>
+      <View style={styles.messageWrapper}>
+        <Text style={styles.message}>
+          Nenhum veículo em uso.
+          <Text style={styles.clickMessage}>
+            Clique aqui para registrar saída
+          </Text>
         </Text>
       </View>
     </TouchableOpacity>

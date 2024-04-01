@@ -1,20 +1,23 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
+import Car from '../assets/icons/car.svg';
+import Flag from '../assets/icons/flag.svg';
 import colors from '../consts/colors';
 
 export function OnGoingTrip({startingAddress, endAddress}) {
-  console.log('startingAddress');
-  console.log(startingAddress.CheckInAt);
+  console.log(startingAddress, endAddress);
 
   return (
     <View>
       <View style={styles.location}>
         <View style={styles.iconContainer}>
-          <Image source={require('../assets/images/car.png')} />
+          <Car width={24} height={24} />
         </View>
         <View style={styles.text}>
-          <Text style={styles.title}>Saindo de </Text>
+          <Text style={styles.title}>
+            Saindo de {startingAddress.checkInAddress}
+          </Text>
           <Text style={styles.address}>
             as{' '}
             {startingAddress.CheckInAt.toLocaleTimeString('pt-BR', {
@@ -27,7 +30,7 @@ export function OnGoingTrip({startingAddress, endAddress}) {
       <View style={styles.line} />
       <View style={styles.location}>
         <View style={styles.iconContainer}>
-          <Image source={require('../assets/images/car.png')} />
+          <Flag width={24} height={24} />
         </View>
         <View style={styles.text}>
           <Text style={styles.title}>Chegando em {endAddress}</Text>
