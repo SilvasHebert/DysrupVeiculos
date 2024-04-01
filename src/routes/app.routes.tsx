@@ -8,7 +8,6 @@ import {useRealm} from '@realm/react';
 
 import {OfflineIndicator} from '../components/OfflineIndicator';
 import colors from '../consts/colors';
-import {WatchPositionProvider} from '../contexts/WatchPositionContext';
 import {Trip} from '../models/Trip';
 import {CheckIn} from '../screens/CheckIn';
 import {CheckOut} from '../screens/CheckOut';

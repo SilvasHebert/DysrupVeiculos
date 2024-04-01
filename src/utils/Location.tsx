@@ -1,6 +1,5 @@
 import {PermissionsAndroid} from 'react-native';
 import {LatLng} from 'react-native-maps';
-import Geolocation from '@react-native-community/geolocation';
 
 import {GoogleMapsAPIKey} from '../consts/tokens';
 

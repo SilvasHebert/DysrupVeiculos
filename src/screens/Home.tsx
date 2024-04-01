@@ -21,6 +21,7 @@ export function Home() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.flatListContent}
           data={trips.filtered('active == false').sorted('CheckInAt', true)}
+          // eslint-disable-next-line react/no-unstable-nested-components
           ListHeaderComponent={() => <Title>Histórico</Title>}
           stickyHeaderIndices={[0]}
           renderItem={({item}) => <TrackRecordItem item={item} />}

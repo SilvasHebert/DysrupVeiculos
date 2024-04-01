@@ -25,12 +25,14 @@ export const WatchPositionProvider = ({
   const watchPosition = () => {
     const id = Geolocation.watchPosition(
       coordenate => {
-        setRoutes(
-          routes.push({
+        console.log(coordenate);
+        setRoutes([
+          ...routes,
+          {
             latitude: coordenate.latitude,
             longitude: coordenate.longitude,
-          }),
-        );
+          },
+        ]);
       },
       () => {},
       {
@@ -42,7 +44,9 @@ export const WatchPositionProvider = ({
   };
 
   const stopWatchPosition = () => {
-    Geolocation.clearWatch(Id);
+    if (Id) {
+      Geolocation.clearWatch(Id);
+    }
   };
 
   return (

@@ -1,7 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {
   Alert,
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -99,7 +98,7 @@ export function CheckOut({navigation}: CheckOutScreenProps) {
     } finally {
       navigation.goBack();
     }
-  }, [realm, actualPos, currentTrip, navigation]);
+  }, [realm, actualPos, currentTrip, navigation, stopWatchPosition]);
 
   if (!currentTrip) {
     return <></>;
